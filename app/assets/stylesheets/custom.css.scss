@@ -1,0 +1,384 @@
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/K88pR3goAWT7BTt32Z01m7O3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+
+$baseFontFamily: 'Open Sans';
+
+@import "bootswatch/cosmo/variables";
+@import "bootstrap";
+body { padding-top: 70px; }
+@import "bootswatch/cosmo/bootswatch";
+@import "font-awesome";
+
+/* mixins, variables, etc. */
+$grayMediumLight: #eaeaea;
+$grayLight: #ccc;
+
+/*$sansFontFamily
+$serifFontFamily
+$monoFontFamily */
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+
+h1,
+.h1 {
+  font-size: 39px;
+}
+
+h2,
+.h2 {
+  font-size: 32px;
+}
+
+h3,
+.h3 {
+  font-size: 26px;
+}
+
+h4,
+.h4 {
+  font-size: 19px;
+}
+
+h5,
+.h5 {
+  font-size: 15px;
+}
+
+h6,
+.h6 {
+  font-size: 13px;
+}
+
+p {
+  margin: 0 0 10.5px;
+}
+
+.page-header {
+  margin: 20px 0 30px;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  padding-top: 3px;
+  position: absolute;
+}
+
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $grayMediumLight;
+  color: $grayLight;
+  a {
+    color: $gray;
+    &:hover {
+      color: $grayDarker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+/* treatments */
+
+/*.treatments {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}*/
+
+.content {
+  display: block;
+}
+.timestamp {
+  color: $grayLight;
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+
+/* adjust navbar */
+.navbar.transparent.navbar-inverse .navbar-inner {
+  background: rgba(255,89,0,0.7);
+}
+
+.nav {
+  font-size: 16px;
+
+}
+
+/* Tabs padding */
+.nav-pills {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* button edit */
+.btn-large {
+  padding: 15px 30px;
+}
+
+body {
+
+  font-size: 15px;
+  color: #333333;
+  line-height: 1.428571429;
+}
+
+.text-primary {
+  color: #007fff;
+}
+
+.ganttview-vtheader {
+  padding-right: 10px;
+}
+
+.label, .badge {
+  font-size: 15px;
+}
+
+.label {
+  min-height: 20px;
+}
+
+.label-ps {
+  background-color: #3fb618;
+}
+
+.label-s1 {
+  background-color: #ff0039;
+}
+
+.label-s2 {
+  background-color: #007fff;
+}
+
+.label-ss {
+  background-color: #9954bb;
+}
+
+.popover {
+  max-width: 500px;
+  width: auto;
+}
+
+
+.popover-content {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+#h5-inline h5 {
+  display: inline-block;
+}
+
+#h4-inline h4 {
+  display: inline-block;
+}
+
+.tooltip {
+  font-size: 14px;
+}
+
+/* remove line jump upon error in form */
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}
+
+.form-horizontal .control-group, .form-horizontal .field_with_errors {
+  margin-bottom: 20px;
+  *zoom: 1; }
+.form-horizontal .control-group:before, .form-horizontal .field_with_errors:before, .form-horizontal .control-group:after, .form-horizontal .field_with_errors:after {
+  display: inline;
+  content: "";
+  line-height: 0; }
+.form-horizontal .control-group:after, .form-horizontal .field_with_errors:after {
+  clear: both; }
+
+.form-actions {
+  background-color: #ffffff;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 60px;
+  margin-top: 30px;
+}
+
+.carousel .container {
+  position: relative;
+  z-index: 9;
+}
+
+.carousel-control {
+  height: 80px;
+  margin-top: 0;
+  font-size: 120px;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+  background-color: transparent;
+  border: 0;
+  z-index: 10;
+}
+
+.carousel .item {
+  height: 600px;
+}
+.carousel img {
+  position: absolute;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  height: 500px;
+}
+
+.carousel-caption-header {
+  background-color: transparent;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  /*max-width: 550px;*/
+  padding-top: 0px;
+}
+
+.carousel-caption-header h1,
+.carousel-caption-header .lead {
+  margin: 0;
+  line-height: 1.25;
+  font-weight: 800;
+
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+
+.carousel-caption {
+  background-color: transparent;
+  position: static;
+  width: 100%;
+  /*max-width: 550px;*/
+
+
+  margin-top: 500px;
+}
+.carousel-caption h1,
+.carousel-caption .lead {
+  margin: 0;
+  line-height: 1.25;
+  color: #333333;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+.carousel-caption .btn {
+  margin-top: 10px;
+}

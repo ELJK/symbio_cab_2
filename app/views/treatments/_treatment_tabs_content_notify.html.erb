@@ -1,0 +1,78 @@
+<div class="well">
+
+    <div class="row-fluid">
+      <div class="span10">
+        <p class='lead text-primary'>Уведомления</p>
+      </div>
+      <div align="right" class="span2">
+        <% unless @notification[counter-1] == nil %>
+            <%= link_to '<i class="fa fa-pencil text-primary"></i>'.html_safe, edit_treatment_notification_path(treatment_id: treatment.id), title: 'Редактировать', rel: 'tooltip' %>
+            <a href="#delete-confirm-not-<%= counter %>" data-id="<%= treatment.id %>" class="delete-confirm-not-<%= counter %>" title="Удалить" rel="tooltip"><i class="fa fa-trash-o text-error"></i></a>
+        <% end %>
+      </div>
+    </div>
+
+<div class="modal fade" id="delete-confirm-not-<%= counter %>">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Подтверждение удаления</h3>
+  </div>
+  <div class="modal-body">
+    <p>Вы действительно хотите удалить уведомления?</p>
+  </div>
+  <div class="modal-footer">
+    <%= link_to 'Удалить', treatment_notification_path(treatment_id: treatment.id), method: :delete, :class => 'btn btn-danger' %>
+    <a href="#" data-dismiss="modal" class="btn">Отмена</a>
+  </div>
+</div>
+
+
+    <% if @notification[counter-1] == nil %>
+
+      <div class="row-fluid">
+        <div class="span12">
+          Вы можете создать Email оповещения
+          <%= link_to 'Создать', new_user_treatment_notification_path(user_id: @user, treatment_id: treatment.id), class: 'btn btn-primary' %>
+        </div>
+      </div>
+
+    <% else %>
+
+    <div class="row-fluid">
+      <div class="span3">
+        <h4>Статус:</h4>
+      </div>
+      <div class="span9">
+        <%# if @notification[counter-1].eactive == true  %>
+        <% if @notification[counter-1].econfirmed == true %>
+            <% @notification[counter-1].eactive == true ? @str = "#{@notification[counter-1].eregime}" : @str = "Отключены" %>
+        <% else %>
+             <% @str = "Email не подтвержден" %>
+        <% end %>
+
+        <%# @notification[counter-1].pactive == true ? @str2 = "SMS (#{@notification[counter-1].pregime})" : @str2 = "SMS (Отключен)" %>
+
+        <h4><%#= @notification[counter-1].eactive == true ? (@notification[counter-1].pactive == true ? "Email (#{@notification[counter-1].eregime}) и SMS (#{@notification[counter-1].pregime}) " : "Email (#{@notification[counter-1].eregime})") : (@notification[counter-1].pactive == true ? "SMS (#{@notification[counter-1].pregime})" : "Отключены") %></h4>
+        <h4><p><%= "#{@str}" %></p><p><%#= "#{@str2}" %></p></h4>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span3">
+        <h4>Email:</h4>
+      </div>
+      <div class="span9">
+        <h4><%= @notification[counter-1].email %></h4>
+      </div>
+    </div>
+    <!-- <div class="row-fluid">
+      <div class="span3">
+        <h4>SMS:</h4>
+      </div>
+      <div class="span9">
+        <h4><%#= @notification[counter-1].phone %></h4>
+      </div>
+    </div> -->
+
+    <% end %>
+
+</div>

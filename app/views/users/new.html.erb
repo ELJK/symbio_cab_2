@@ -1,0 +1,16 @@
+<% provide(:title, 'Регистрация') %>
+
+<div class="row">
+  <div class="span8 offset2">
+    <%= form_for(@user, html: {class: "form-horizontal"}) do |f| %>
+        <fieldset>
+          <legend><h3 class='text-center'>Регистрация</h3></legend>
+            <%= render 'fields', f: f %>
+            <%= render 'fields2', f: f %>
+          <div class="form-actions">
+            <%= f.submit "Отправить", class: "btn btn-large btn-primary" %>
+          </div>
+        </fieldset>
+    <% end %>
+  </div>
+</div>

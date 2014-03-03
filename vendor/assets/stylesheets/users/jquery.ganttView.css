@@ -1,0 +1,225 @@
+/*
+jQuery.ganttView v.0.8.0
+Copyright (c) 2010 JC Grubbs - jc.grubbs@devmynd.com
+MIT License Applies
+*/
+
+div.ganttview-hzheader-month,
+div.ganttview-hzheader-day,
+div.ganttview-hzheader-day-weekend,
+div.ganttview-vtheader,
+div.ganttview-vtheader-item-name,
+div.ganttview-vtheader-series,
+div.ganttview-inv-grid,
+div.ganttview-inv-grid-row-cell,
+div.ganttview-grid,
+div.ganttview-grid-row-cell {
+	float: left;
+}
+
+div.ganttview-hzheader-month,
+div.ganttview-hzheader-day-weekend,
+div.ganttview-hzheader-day {
+	text-align: center;
+}
+
+div.ganttview-inv-grid-row-cell.last,
+div.ganttview-grid-row-cell.last,
+div.ganttview-hzheader-day-weekend.last,
+div.ganttview-hzheader-day.last,
+div.ganttview-hzheader-month.last {
+	border-right: none;
+}
+
+div.ganttview {
+	border: 0px solid #c0c0c0;
+}
+
+
+/* Horizontal Header */
+
+div.ganttview-hzheader-month {
+	width: 60px;
+	height: 30px;
+	border-right: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
+	line-height: 20px;
+}
+
+div.ganttview-hzheader-day {
+	width: 20px;
+	height: 20px;
+	border-right: 1px solid #f0f0f0;
+	border-top: 1px solid #f0f0f0;
+	line-height: 20px;
+	/*color: #777;*/
+}
+
+div.ganttview-hzheader-day-weekend {
+    width: 20px;
+    height: 20px;
+    border-right: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
+    line-height: 20px;
+    color: #ff0039;
+}
+
+/* Vertical Header */
+
+div.ganttview-vtheader {
+	margin-top: 51px;
+	/*width: 240px;*/
+	overflow: hidden;
+	background-color: #fff;
+}
+
+div.ganttview-vtheader-item {
+	overflow: hidden;
+	color: #666;
+}
+
+div.ganttview-vtheader-item-name {
+	/*width: 100px;*/
+	/*padding-left: 5px;*/
+	border-top: 1px solid #d0d0d0;
+	line-height: 16px;
+}
+
+div.ganttview-vtheader-series-name {
+	/*width: 130px;*/
+	height: 101px;
+	border-top: 1px solid #d0d0d0;
+	line-height: 16px;
+	padding-left: 5px;
+}
+
+
+/* Slider */
+
+div.ganttview-slide-container {
+	overflow: auto;
+	border-left: 1px solid #f0f0f0;
+}
+
+
+/* Grid */
+
+#grid-primary {
+    z-index: 200;
+    position:relative;
+}
+
+div.ganttview-grid-row-cell {
+	/*width: 20px;*/
+	height: 101px;
+	border-right: 1px solid #f0f0f0;
+	border-top: 1px solid #f0f0f0;
+}
+
+div.ganttview-grid-row-cell.ganttview-weekend {
+	background-color: #fafafa;
+}
+
+/* Today */
+
+div.ganttview-day-today {
+    background-color: #ff5900;
+    color: #fff;
+}
+
+div.ganttview-hzheader-day:hover {
+    color: #fff;
+    background-color: #ff5900;
+    cursor: context-menu;
+}
+
+div.ganttview-hzheader-day-weekend:hover {
+    color: #fff;
+    background-color: #ff5900;
+    cursor: context-menu;
+}
+
+div.ganttview-inv-grid-row-cell.ganttview-day-today.ganttview-day-today-bottom {
+    border-bottom: 2px solid #ff5900 ;
+}
+
+div.ganttview-inv-grid-row-cell.ganttview-day-today {
+    z-index: 1200;
+    background-color: transparent;
+    margin-right: 1px;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-left: 2px solid #ff5900 ;
+    border-right: 2px solid #ff5900 ;
+}
+
+div.ganttview-slide-container.ganttview-day-today.last-item {
+    border-bottom: 2px solid #ff0000 ;
+}
+
+/* Invisible Grid */
+
+#grid-invisible {
+    margin-top: -408px;
+    z-index: 1000;
+    position:relative;
+    background-color: rgba(255, 255, 255, 0.1);
+
+}
+
+div.ganttview-inv-grid-row-cell {
+    /*width: 20px;*/
+
+    height: 101px;
+    padding-right: 3px;
+    padding-left: 2px;
+    padding-top: 1px;
+}
+
+div.ganttview-inv-grid-row-cell.ganttview-weekend {
+    background-color: #fafafa;
+}
+
+/* Blocks */
+
+div.ganttview-blocks {
+    position:relative;
+    z-index: 500;
+	margin-top: 51px;
+}
+
+div.ganttview-block-container {
+	height: 99px;
+	padding-top: 2px;
+    padding-bottom: 1px;
+}
+
+div.ganttview-block {
+	position: relative;
+	height: 99px;
+	background-color: #E5ECF9;
+	border: 0px solid #c0c0c0;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+}
+
+div.ganttview-block-text {
+	position: absolute;
+	height: 12px;
+	font-size: 0.8em;
+	color: #999;
+	padding: 2px 3px;
+}
+
+
+/* Adjustments for jQuery UI Styling */
+
+div.ganttview-block div.ui-resizable-handle.ui-resizable-s {
+	bottom: -0;
+}
+
+div.ganttChart {
+    width: 100%;
+    padding-top: 20px;
+}

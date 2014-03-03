@@ -1,0 +1,39 @@
+<header class="navbar transparent navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to image_tag('cab-logo2.png', size: '260'), root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <li><%= link_to "Онлайн-заказ",    root_path %></li>
+          <li><%= link_to "Симбиофарм",    root_path %></li>
+          <li><%= link_to "О Системе",    about_path %></li>
+
+          <% if signed_in? %>
+              <li id="fat-menu" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Пользователь <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><% if current_user.admin? %>
+                        <%= link_to "Пользователи", admin_path %>
+                        </li>
+                        <li class="divider"></li>
+                    <% end %>
+
+                  <li><%= link_to "Профайл", current_user %></li>
+                  <li><%= link_to "Настройки", edit_user_path(current_user) %></li>
+                  <li class="divider"></li>
+                  <li>
+                    <%= link_to "Выйти", signout_path, method: "delete" %>
+                  </li>
+                </ul>
+              </li>
+          <% else %>
+              <li><%= link_to "Войти", signin_path %></li>
+          <% end %>
+
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

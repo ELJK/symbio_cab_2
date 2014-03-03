@@ -1,0 +1,31 @@
+<% provide(:title, "Sign in") %>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(:session, url: sessions_path, html: {class: "form-horizontal"}) do |f| %>
+        <fieldset>
+          <legend><h1 class='text-center'>Вход в систему</h1></legend>
+
+        <div class="control-group">
+            <%= f.label :email, "Email", class: 'control-label' %>
+            <div class="controls">
+                <%= f.text_field :email, class: 'input-large' %>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <%= f.label :password, "Пароль", class: 'control-label' %>
+            <div class="controls">
+              <%= f.password_field :password, class: 'input-large' %>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <%= f.submit "Вход", class: "btn btn-large btn-primary" %>
+        </div>
+        </fieldset>
+    <% end %>
+
+    <p class="text-center">Новый пользователь? <%= link_to "Зарегистрироваться сейчас!", signup_path %></p>
+  </div>
+</div>

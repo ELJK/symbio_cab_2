@@ -1,0 +1,60 @@
+
+
+<%= render 'shared/error_messages', object: f.object %>
+
+<div class="control-group">
+  <%= f.label :eactive, 'Email уведомления', class: 'control-label' %>
+  <div class="controls">
+    <label class="radio">
+      <%= f.radio_button :eactive, 'true', checked: true %>
+      <%= f.label :eactive, 'Вкл.' %>
+    </label>
+    <label class="radio">
+      <%= f.radio_button :eactive, 'false' %>
+      <%= f.label :eactive, 'Выкл.' %>
+    </label>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :email, 'Email', class: 'control-label' %>
+  <div class="controls">
+    <%= @user.nil? ? (f.text_field :email, class: 'input-large') : (f.text_field :email, class: 'input-large', value: @user.email) %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :eregime, 'Частота', class: 'control-label' %>
+  <div class="controls">
+    <%= f.select :eregime, [['Ежедневно','Ежедневно'],['Еженедельно','Еженедельно']],{}, {class:'span3'} %>
+  </div>
+</div>
+
+<!-- <div class="control-group">
+  <%#= f.label :pactive, 'SMS напоминания', class: 'control-label' %>
+  <div class="controls">
+    <label class="radio">
+      <%#= f.radio_button :pactive, 'true', checked: true %>
+      <%#= f.label :pactive, 'Вкл.' %>
+    </label>
+    <label class="radio">
+      <%#= f.radio_button :pactive, 'false' %>
+      <%#= f.label :pactive, 'Выкл.' %>
+    </label>
+  </div>
+</div>
+
+
+<div class="control-group">
+  <%#= f.label :phone, 'Моб. телефон', class: 'control-label' %>
+  <div class="controls">
+    <%#= f.text_field :phone, class: 'input-large' %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%#= f.label :pregime, 'Частота', class: 'control-label' %>
+  <div class="controls">
+    <%#= f.select :pregime, [['Ежедневно','Ежедневно'],['Еженедельно','Еженедельно']],{}, {class:'span3'} %>
+  </div>
+</div> -->

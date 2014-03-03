@@ -1,0 +1,17 @@
+<!-- generate tab titles -->
+<% counter = 1 %>
+
+<ul class="nav nav-pills">
+  <% @treatments.each do |treatment| %>
+      <% if counter == 1 %>
+
+          <li class="active">
+      <% else %>
+          <li>
+      <% end %>
+      <a href="#tab<%= counter %>" data-toggle="tab">Курс <%= counter %>: <%= "#{treatment.dname} #{treatment.dsurname}".sub(/(.+\b.).+\z/, '\1.') %>, <%= treatment.tdate.strftime('%d/%m/%y') %></a>
+      </li>
+      <% counter+= 1 %>
+  <% end %>
+  <li><a href="#tab<%= counter %>" data-toggle="tab">Добавить новый курс </a></li>
+</ul>

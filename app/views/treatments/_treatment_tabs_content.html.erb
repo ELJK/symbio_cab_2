@@ -1,0 +1,170 @@
+<% counter = 1 %>
+<div class="tab-content" xmlns="http://www.w3.org/1999/html">
+  <% @treatments.each do |treatment| %>
+
+
+  <% if counter == 1 %>
+      <div class="tab-pane fade in active" id="tab<%= counter %>">
+  <% else %>
+      <div class="tab-pane fade" id="tab<%= counter %>">
+  <% end %>
+
+      <div id="treatment-<%= counter %>">
+          <div class="row">
+            <div class="span12">
+                <h3>Подробнее</h3>
+                 <blockquote id="info-block"></blockquote>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span6">
+              <%= render partial:'treatments/treatment_tabs_content_dr', locals: {treatment: treatment}  %>
+              <%= render partial:'treatments/treatment_tabs_content_notify', locals: {treatment: treatment, counter: counter} %>
+            </div>
+            <div class="span6">
+              <%= render partial:'treatments/treatment_tabs_content_dates', locals: {treatment: treatment, counter: counter} %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span12">
+              <h3>График лечения</h3>
+              <div class="ganttChart" id="ganttChart-<%= counter %>"></div>
+              <br/><br/>
+              <div id="eventMessage-<%= counter %>"></div>
+              <script type="text/javascript">
+                  var btprog = "<%= treatment.tprog %>";
+                  var btph0_s = <%= treatment.tph0_s.to_time.utc.to_i*1000 %>;
+                  var btph0_e = <%= treatment.tph0_e.to_time.utc.to_i*1000 %>;
+                  var btph1_s = <%= treatment.tph1_s.to_time.utc.to_i*1000 %>;
+                  var btph1_e = <%= treatment.tph1_e.to_time.utc.to_i*1000 %>;
+                  var btph2_s = <%= treatment.tph2_s.to_time.utc.to_i*1000 %>;
+                  var btph2_e = <%= treatment.tph2_e.to_time.utc.to_i*1000 %>;
+                  var bcountid = "<%= counter %>";
+                  var bwidth = $(".ganttChart").width();
+                  var ganttData = ganttCreate(btprog,btph0_s,btph0_e,btph1_s,btph1_e,btph2_s,btph2_e,bcountid,bwidth);
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% counter2 = 0 %>
+      <% @schedule[counter-1].each do |day| %>
+          <script type="text/javascript">
+
+          </script>
+
+          <% unless @schedule[counter-1][counter2].ps == 0 %>
+              <% ps = "<span class='label label-ps'>ПРО-СИМБИОФЛОР</span> <h5>#{@schedule[counter-1][counter2].ps} #{Russian.p(@schedule[counter-1][counter2].ps,"каплю","капли","капель")}  #{@schedule[counter-1][counter2].psr} #{Russian.p(@schedule[counter-1][counter2].psr,"раз","раза","раз")} в день </h5>".html_safe %>
+              <% if @schedule[counter-1][counter2].d.today? %>
+                  <% @today_ps = "#{ps}<br>" %>
+              <% end %>
+          <% end %>
+
+          <% unless @schedule[counter-1][counter2].s1 == 0 %>
+              <% s1 = "<span class='label label-s1'>СИМБИОФЛОР 1</span> <h5>#{@schedule[counter-1][counter2].s1} #{Russian.p(@schedule[counter-1][counter2].s1,"каплю","капли","капель")} #{@schedule[counter-1][counter2].s1r} #{Russian.p(@schedule[counter-1][counter2].s1r,"раз","раза","раз")} в день </h5>".html_safe %>
+              <% if @schedule[counter-1][counter2].d.today? %>
+                  <% @today_s1 = "#{s1}<br>" %>
+              <% end %>
+          <% end %>
+
+          <% unless @schedule[counter-1][counter2].s2 == 0 %>
+              <% s2 = "<span class='label label-s2'>СИМБИОФЛОР 2</span> <h5>#{@schedule[counter-1][counter2].s2} #{Russian.p(@schedule[counter-1][counter2].s2,"каплю","капли","капель")} #{@schedule[counter-1][counter2].s2r} #{Russian.p(@schedule[counter-1][counter2].s2r,"раз","раза","раз")} в день </h5>".html_safe %>
+              <% if @schedule[counter-1][counter2].d.today? %>
+                  <% @today_s2 = "#{s2}<br>" %>
+              <% end %>
+          <% end %>
+
+          <% unless @schedule[counter-1][counter2].ss == 0 %>
+              <% ss = "<span class='label label-ss'>СИМБИОСАН</span> <h5>#{@schedule[counter-1][counter2].ss} #{Russian.p(@schedule[counter-1][counter2].ss,"пакетик","пакетика","пакетиков")}  #{@schedule[counter-1][counter2].ssr} #{Russian.p(@schedule[counter-1][counter2].ssr,"раз","раза","раз")} в день </h5>".html_safe %>
+              <% if @schedule[counter-1][counter2].d.today? %>
+                  <% @today_ss = "#{ss}<br>" %>
+              <% end %>
+              <% end %>
+
+
+          <% if @schedule[counter-1][counter2].d.today? %>
+            <% @today = counter2 %>
+          <% end %>
+
+
+          <% str = "#{ps} #{s1} #{s2} #{ss}".html_safe  %>
+
+          <script type="text/javascript">
+              $('#tab<%= counter %>').find('.ganttview-hzheader').find("#d<%= @schedule[counter-1][counter2].d.day %>m<%= @schedule[counter-1][counter2].d.month-1 %>y<%= @schedule[counter-1][counter2].d.year %>").attr("data-original-title","День <%= counter2+1 %>")
+
+              $('#tab<%= counter %>').find('.ganttview-hzheader').find("#d<%= @schedule[counter-1][counter2].d.day %>m<%= @schedule[counter-1][counter2].d.month-1 %>y<%= @schedule[counter-1][counter2].d.year %>").attr("data-content","<%= str %>")
+
+          </script>
+          <% counter2 += 1 %>
+      <% end %>
+      <script type="text/javascript">
+
+          <% if ((treatment.tdate..treatment.tph2_e).cover?(Date.today)) %>
+              <% str2 =  "<p class='lead text-primary'>Сегодня #{Russian.strftime(@schedule[counter-1][@today].d, '%e %B')}, #{@today+1}-й день вашего лечения (#{@status})</p>".html_safe %>
+              <% str3 = "<h4>Ваша дневная дозировка:</h4>".html_safe %>
+              <% str4 = "<span id='h5-inline'>#{@today_ps} #{@today_s1} #{@today_s2} #{@today_ss}</span>" %>
+              <% str5 = "#{str2} #{str3} #{str4}".html_safe %>
+              $('#tab<%= counter %>').find('#info-block').html("<%= str5 %>")
+          <% else %>
+          <% str6 = "<p class='lead text-primary'>Ваш курс лечения был закончен #{Russian.strftime(@schedule[counter-1].last.d, '%e %B %Y')} года.</p>".html_safe %>
+          $('#tab<%= counter %>').find('#info-block').html("<%= str6 %>")
+          <% end %>
+
+          $('a').tooltip({trigger: 'hover'})
+
+
+          <% @today = 0 %>
+          <% @today_ps = nil %>
+          <% @today_s1 = nil %>
+          <% @today_s2 = nil %>
+          <% @today_ss = nil %>
+
+          // Delete confirmation modals
+          $('#delete-confirm-not-<%= counter %>').on('show', function() {
+              var $submit = $(this).find('.btn-danger'),
+                      href = $submit.attr('href');
+              $submit.attr('href', href.replace('pony', $(this).data('id')));
+          });
+
+          $('.delete-confirm-not-<%= counter %>').click(function(e) {
+              e.preventDefault();
+              $('#delete-confirm-not-<%= counter %>').data('id', $(this).data('id')).modal('show');
+          });
+
+          $('#delete-confirm-dat-<%= counter %>').on('show', function() {
+              var $submit = $(this).find('.btn-danger'),
+                      href = $submit.attr('href');
+              $submit.attr('href', href.replace('pony', $(this).data('id')));
+          });
+
+          $('.delete-confirm-dat-<%= counter %>').click(function(e) {
+              e.preventDefault();
+              $('#delete-confirm-dat-<%= counter %>').data('id', $(this).data('id')).modal('show');
+          });
+
+      </script>
+      <% counter+= 1 %>
+
+  <% end %>
+      <div class="tab-pane fade" id="tab<%= counter %>">
+        <div id="new_treatment">
+          <div class="row">
+            <div class="span8 offset2">
+              <%= form_for([@user, @new_treatment], html: {class: "form-horizontal"}) do |f| %>
+                  <fieldset>
+                    <legend><h3 class='text-center'>Добавить новый курс лечения</h3></legend>
+                    <%= render 'shared/treatment_form', f: f %>
+
+                        <div class="form-actions">
+                      <%= f.submit "Добавить", class: "btn btn-large btn-primary" %>
+                    </div>
+
+                  </fieldset>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>

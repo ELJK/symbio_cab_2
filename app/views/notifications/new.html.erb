@@ -1,0 +1,16 @@
+<% provide(:title, "Добавить уведомления") %>
+
+<div class="row">
+  <div class="span8 offset2">
+    <%= form_for [@user, @treatment, @notify], url: user_treatment_notification_path, html: {class: "form-horizontal"} do |f| %>
+        <fieldset>
+          <legend><h3 class='text-center'>Добавить уведомления</h3></legend>
+          <%= render 'shared/notification_form', f: f %>
+
+          <div class="form-actions">
+            <%= f.submit "Отправить", class: "btn btn-large btn-primary" %>
+          </div>
+        </fieldset>
+    <% end %>
+  </div>
+</div>

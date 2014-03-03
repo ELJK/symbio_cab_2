@@ -1,0 +1,53 @@
+
+
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <div class="control-group">
+      <%= f.label :dname, 'Имя врача', class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :dname, class: 'input-large' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :dsurname, 'Фамилия врача', class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :dsurname, class: 'input-large' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :dcliic, 'Название клиники', class: 'control-label' %>
+      <div class="controls">
+          <%= f.text_field :dclinic, class: 'input-large' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :tprog, 'Тип схемы', class: 'control-label' %>
+      <div class="controls">
+        <%= f.select :tprog, [['Стандарт - Взрослые','Стандарт - Взрослые'],['Стандарт - Дети','Стандарт - Дети'],['Аллергия - Взрослые','Аллергия - Взрослые'],['Аллергия - Дети','Аллергия - Дети']], {} , {class:'span3'} %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :tdate, 'Дата начала лечения', class: 'control-label' %>
+      <div class="controls" id="tdate">
+        <div class="input-append date">
+          <%= f.text_field :tdate, class: 'input-small', readonly: 'true' %>
+          <span class="add-on"><i class="fa fa-calendar-o"></i></span>
+        </div>
+
+        <script type="text/javascript">
+            $('#tdate .input-append.date').datepicker({
+                format: 'yyyy-mm-dd',
+                todayBtn: true,
+                language: "ru",
+                autoclose: true,
+                todayHighlight: true
+            });
+        </script>
+      </div>
+
+    </div>
+

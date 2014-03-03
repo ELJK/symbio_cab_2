@@ -1,0 +1,12 @@
+<% if object.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        <%=  Russian.p(object.errors.count, "Допущена", "Допущены", "Допущены") %> <%= object.errors.count  %> <%=  Russian.p(object.errors.count, "ошибка", "ошибки", "ошибок") %>
+      </div>
+      <ul>
+        <% object.errors.full_messages.each do |msg| %>
+            <li>* <%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
